@@ -1,4 +1,4 @@
-class Triangulo:
+class Triangulo:# Classe é um modelo de um triangulo
     # atributo- dados vão ser amarzenados: b - base, h - altura
     def __init__(self):
         self.b = 0

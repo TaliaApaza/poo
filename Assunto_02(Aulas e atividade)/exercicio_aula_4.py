@@ -1,6 +1,6 @@
 class Retangulo():
     def __init__(self, b, h):
-        self.set_baser(b)
+        self.set_base(b)
         self.set_altura(h)
 
     def set_base(self, v):
@@ -16,7 +16,10 @@ class Retangulo():
     
     def get_altura(self):
         return self.__h
+    def calc_area(self):
+        return self.__b* self.__h
     
-    def get
+    def __str__(self):#proprio para texto(é uym metodo magico(se indentifica atraves do "__"))
+        return f"Olá, eu sou um Triangulo, minha base é {self.__b} minha altura é {self.__h}"
 
         

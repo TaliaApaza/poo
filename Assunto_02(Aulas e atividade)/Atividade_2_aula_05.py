@@ -31,7 +31,7 @@ class Pais():
     def __str__(self):
         return f"Nome do pais: {self.__n}| População: {self.__p} | Area: {self.__a} | Densidade: {self.calc_densidade()}"
 
-class UI:
+class UI:#ContatoUI
     @staticmethod
     def main():
         op = 0

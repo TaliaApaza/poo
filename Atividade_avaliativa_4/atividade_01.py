@@ -73,7 +73,7 @@ class UI:
     @staticmethod
     def main():
         op = 0
-        while op != 11:
+        while op != 12:
             op = UI.menu()
             if op == 1: UI.inserir_time()
             if op == 2: UI.listar_time()

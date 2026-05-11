@@ -7,11 +7,13 @@ class Bingo:
     def iniciar(self):
         if self.nu_bola >= 0:
             a = 0
-            while 1 <= self.nu_bolas:
+            while a <= self.nu_bolas:
                 a += 1
                 self.bolas.append(a)
+        else: raise ValueError("numero invalido")
     def sortear(self):
-        b = random.shuffle(self.bolas)
+        random.shuffle(self.bolas)#embaralha a lista que contem as bolas
+        b = self#pop para retirar um elemento
         self.sorteados.append(b)
         return b
     

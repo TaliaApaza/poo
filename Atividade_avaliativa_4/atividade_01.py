@@ -90,23 +90,23 @@ class UI:
         print("Escolha uma opção: 1-inserir time, 2- listar time 3- atualizar time 4-excluir times, 5-inserir jogador, 6- listar jogadores 7- atualizar jogador, 8-excluir jogador 9-transferir um jogador, 10- sair ")
         op = int(input("Escolha uma opção: "))
         return op
-    @staticmethod
-    def inserir_time():
+    @classmethod
+    def inserir_time(cls):
         id = int(input("Informe o id do time que será inserido "))
         n = input("Informe o nome do time")
         eft = input("informe o estado onde ele foi constituido ")
         x = Time(id, n, eft)
-        UI.lista_time.append(x)
+        cls.lista_time.append(x)
         print(x)
-    @staticmethod
-    def listar_time():
-        for time in UI.lista_time:
+    @classmethod
+    def listar_time(cls):
+        for time in cls.lista_time:
             print(time)
 
-    @staticmethod
-    def atualizar_time():
+    @classmethod
+    def atualizar_time(cls):
         id_atualizar=int(input("informe o id do time que deseja atualizar"))
-        for time in UI.lista_time:
+        for time in cls.lista_time:
             if time.get_id() == id_atualizar: # vai especificar o item que eu quero da lista(lembrando que get guarda o item da lista)
                 nome_novo = input("Informe o novo nome a ser usado ou se não quiser alterar repita o mesmo nome: ")
                 nome_estado = input("Informe o novo nome de estado a ser usado ou se não quiser alterar repita o mesmo nome: ")
@@ -114,32 +114,32 @@ class UI:
                 time.set_estado(nome_estado)
                 print("Atualizado") 
             print(time)
-    @staticmethod
-    def excluir_times():
+    @classmethod
+    def excluir_times(cls):
         id_excluir = int(input("informe o id do time que deseja excluir"))
-        for time in UI.lista_time:
+        for time in cls.lista_time:
             if time.get_id() == id_excluir: 
-                UI.lista_time.remove(time)
+                cls.lista_time.remove(time)
                 print("Excluido") 
             print(time)
-    @staticmethod
-    def inserir_jogador():
+    @classmethod
+    def inserir_jogador(cls):
         id_j = int(input("Informe o id do jogador que será inserido: "))
         id = int(input("Informe o id do time do jogador: "))
         nome_j = input("informe o nome do jogador: ")
         camisa = int(input("informe a camisa do jogador: "))
         x = Jogadores(id_j, id, nome_j, camisa)
-        UI.lista_jogador.append(x)
+        cls.lista_jogador.append(x)
         print(x)
-    @staticmethod
-    def listar_jogadores():
-        for jogador in UI.lista_jogador:
+    @classmethod
+    def listar_jogadores(cls):
+        for jogador in cls.lista_jogador:
             print(jogador)
     
-    @staticmethod
-    def atualizar_jogador():
+    @classmethod
+    def atualizar_jogador(cls):
         id_atualizar = int(input("Informe o id do jogador que terá os dados atualizados: "))
-        for jogador in UI.lista_jogador:
+        for jogador in cls.lista_jogador:
             if jogador.get_id_jogadores() == id_atualizar:
                 id_novo_time = int(input("informe o novo id do time caso o jogador tenha mudado de time: "))
                 camisa_novo = int(input("informe o nova camisa do jogador caso o jogador a tenha mudado: "))
@@ -147,34 +147,34 @@ class UI:
                 jogador.set_camisa(camisa_novo)
             print(jogador)
 
-    @staticmethod
-    def excluir_jogador():
+    @classmethod
+    def excluir_jogador(cls):
         id_excluir_j = int(input("Informe o id do jogador que será excluido"))
-        for jogador in UI.lista_jogador:
+        for jogador in cls.lista_jogador:
             if jogador.get_id_jogadores() == id_excluir_j:
-                UI.lista_jogador.remove(jogador)
+                cls.lista_jogador.remove(jogador)
                 print("jogador removido")
 
             print(jogador)
 
-    @staticmethod
-    def transferir_um_jogador():
+    @classmethod
+    def transferir_um_jogador(cls):
         id_atualizar = int(input("Informe o id do jogador que terá os dados atualizados: "))
-        for jogador in UI.lista_jogador:
+        for jogador in cls.lista_jogador:
             if jogador.get_id_jogadores() == id_atualizar:
                 id_novo_time = int(input("informe o novo id do time caso o jogador tenha mudado de time: "))
                 jogador.set_id(id_novo_time)
                 print("Jogador transferido")
             print(jogador)
 
-    @staticmethod
-    def listar_jogadores_time():
+    @classmethod
+    def listar_jogadores_time(cls):
         id_igual = int(input("Informe o id dos jogadores para sabermos se são do mesmo time: "))
-        for jogador in UI.lista_jogador:
+        for jogador in cls.lista_jogador:
             if jogador.get_id() == id_igual:
                 print(jogador)
-    @staticmethod
-    def sair():
+    @classmethod
+    def sair(cls):
         print("Fim")
             
 UI.main()

@@ -16,9 +16,9 @@ class Contato():
     def set_email(self,v):
         if len(v) > 3: self.__email = v
         else: raise ValueError("email invalido")
-    def set_nome(self,v):
+    def set_fone(self,v):
 
-        if v > 8: self.__fone = v
+        if len(v) > 8: self.__fone = v
         else: raise ValueError("número invalido")
     
     def get_id(self):
@@ -38,14 +38,56 @@ class Contato():
  
 
 class contatoUI():
+    lista_contato = []
     @staticmethod
     def main():
         op = 0
-        while op != 7:
+        while op != 6:
             op = contatoUI.menu()
-            if op ==
-
+            if op == 1: contatoUI.inserir_contato()
+            if op == 2: contatoUI.listar_contato()
+            if op == 3: contatoUI.atualizar_dados()
+            if op == 4: contatoUI.excluir_contato()
+            if op == 5: contatoUI.pesquisar_inicial()
+        print("fim")
+    @staticmethod
     def menu():
-        print("escolha uma opção")
+        print("escolha uma opção:  1-inserir contato, 2-listar contatos, 3-atualizar dados de contatos, 4-excluir contato, 5- pesquisar contato pela inicial do nome 6- sair")
         op = int(input("Informe a opção: "))
         return op
+    @classmethod
+    def inserir_contato(cls):
+        id = int(input("Informe id: "))
+        nome = input("Informe o nome do contato: ")
+        email = input("Informe o email do contato: ")
+        fone = input("Informe o fone do contato: ")
+        x = Contato(id, nome, email, fone)
+        cls.lista_contato.append(x)
+        print(x)
+
+    @classmethod
+    def listar_contato(cls):
+        for contato in cls.lista_contato:
+            print(contato)
+
+    @classmethod
+    def atualizar_dados(cls):
+        id_atualizar = int(input("Informe o id que irá atualizar: "))
+        for contato in cls.lista_contato:
+            if contato.get_id() == id_atualizar:
+                nome_novo = input("Informe o nome novo do contato: ")
+                email_novo = input("Informe o email novo do contato: ")
+                fone_novo = input("Informe o fone novo do contato: ")
+                contato.set_nome(nome_novo)
+                contato.set_email(email_novo)
+                contato.set_fone(fone_novo)
+                print("Dados atualizados")
+                print(contato)
+    @classmethod       
+    def pesquisar_inicial(cls):
+        inicial = input("informe a inicial: ")
+        for contato in cls.lista_contato:
+            if contato.get_nome()[0] == inicial:
+                print(contato)
+        
+contatoUI.main()

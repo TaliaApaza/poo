@@ -67,7 +67,6 @@ class Jogadores():
         return f"id do jogador: {self.__id_jogadores} | id do time: {self.__id} | nome do jogador: {self.__nome_jogadores} | camisa do jogador: {self.__camisa}"
 
 class UI:
-
     lista_time = [] # para criar uma lista geral, é preciso cria- la na class UI
     lista_jogador = []
     @staticmethod

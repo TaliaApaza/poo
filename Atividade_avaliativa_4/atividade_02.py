@@ -1,10 +1,10 @@
 class Playlist():
-    def __init__(self, id_p, nome,desc ):
-        self.set_id(id)
+    def __init__(self, id_p, nome, desc ):
+        self.set_id_p(id_p)
         self.set_nome(nome)
-        self.set_estado(desc)
+        self.set_descricao(desc)
     
-    def set_id(self, v):
+    def set_id_p(self, v):
         if v >= 0: self.__id = v
         else: raise ValueError()
 
@@ -16,7 +16,7 @@ class Playlist():
         if len(v) >= 3: self.__descricao = v
         else: raise ValueError()
 
-    def get_id(self):
+    def get_id_p(self):
         return self.__id
     
     def get_nome(self):
@@ -30,7 +30,7 @@ class Playlist():
 
 class Musica():
     def __init__(self, id_m, titulo, artista, album):
-        self.set_id_musicas(id_m)
+        self.set_id_musica(id_m)
         self.set_titulo(titulo)
         self.set_nome_artista(artista)
         self.set_album(album)
@@ -48,7 +48,7 @@ class Musica():
         else: raise ValueError()
 
     def set_album(self, v):
-        if v > 0: self.__album = v
+        if len(v) > 0: self.__album = v
         else: raise ValueError()
 
     def get_id_musica(self):
@@ -67,22 +67,27 @@ class Musica():
         return f"id da música: {self.__id_musica} | titulo da música: {self.__titulo} | nome do artista: {self.__nome_artista} | Album: {self.__album}"
     
 class PlayListlem(Playlist, Musica):
-    def __init__(self, id, id_p, id_m):
-        self.set_id_musica(id_m)
+    def __init__(self, id, id_p, id_m, senq):
+        self.set_id(id)
         self.set_id_playlist(id_p)
-        self.set_nome_id(id)
+        self.set_id_musica(id_m)
+        self.set_sequencia(senq)
 
     def set_id_musica(self, v):
-        if v >= 0: self.__id_musica = v
+        if v > 0: self.__id_musica = v
         else: raise ValueError()
 
     def set_id_playlist(self, v):
-        if v >= 0: self.__id_playlist = v
+        if v > 0: self.__id_playlist = v
         else: raise ValueError()
 
 
-    def set_nome_id(self, v):
-        if len(v) >= 3: self.__id= v
+    def set_id(self, v):
+        if v > 0: self.__id= v
+        else: raise ValueError()
+
+    def set_sequencia(self, v):
+        if v > 0 : self.__sequencia = v
         else: raise ValueError()
 
     def get_id_musica(self):
@@ -94,120 +99,150 @@ class PlayListlem(Playlist, Musica):
     def get_id(self):
         return self.__id
     
-    def sequencia():
+    def get_sequencia(self):
+        return self.__sequencia
+    
+    def __str__(self):
+        return f"id: {self.__id} | id da música: {self.__id_musica} | id da playlist da música: {self.__id_playlist} | id da sequencia da música: {self.__sequencia}"
         
 
 class UI:
 
-    lista_time = [] # para criar uma lista geral, é preciso cria- la na class UI
-    lista_jogador = []
+    lista_playlist = [] # para criar uma lista geral, é preciso cria- la na class UI
+    lista_musica = []
+    lista_item_p = []
     @staticmethod
     def main():
         op = 0
-        while op != 12:
+        while op != 14:
             op = UI.menu()
-            if op == 1: UI.inserir_time()
-            if op == 2: UI.listar_time()
-            if op == 3: UI.atualizar_time()
-            if op == 4: UI.excluir_times()
-            if op == 5: UI.inserir_jogador()
-            if op == 6: UI.listar_jogadores()
-            if op == 7: UI.atualizar_jogador()
-            if op == 8: UI.excluir_jogador()
-            if op == 9: UI.transferir_um_jogador()
-            if op == 10: UI.listar_jogadores_time()
-            if op == 11: UI.sair()
+            if op == 1: UI.cadastrar_playlist()
+            if op == 2: UI.listar_playlist()
+            if op == 3: UI.atualizar_playlist()
+            if op == 4: UI.excluir_playlist()
+            if op == 5: UI.cadastra_musica()
+            if op == 6: UI.listar_musica()
+            if op == 7: UI.atualizar_musica()
+            if op == 8: UI.excluir_musica()
+            if op ==9: UI.artistas_musica()
+            if op == 10: UI.adicionar_items()
+            if op == 11: UI.listar_items()
+            if op == 12: UI.atualizar_items()
+            if op == 13: UI.excluir_items()
+        print("fim")
+
     @staticmethod
     def menu():
-        print("Escolha uma opção: 1-inserir time, 2- listar time 3- atualizar time 4-excluir times, 5-inserir jogador, 6- listar jogadores 7- atualizar jogador, 8-excluir jogador 9-transferir um jogador, 10- sair ")
+        print("Escolha uma opção: 1-inserir time, 2- listar time 3- atualizar time 4-excluir times, 5-inserir musica, 6- listar musicaes 7- atualizar musica, 8-excluir musica 9-transferir um musica, 10- sair ")
         op = int(input("Escolha uma opção: "))
         return op
     @staticmethod
-    def inserir_time():
-        id = int(input("Informe o id do time que será inserido "))
-        n = input("Informe o nome do time")
-        eft = input("informe o estado onde ele foi constituido ")
-        x = Time(id, n, eft)
-        UI.lista_time.append(x)
+    def cadastrar_playlist():
+        id_p = int(input("Informe o id da playlist: "))
+        nome = input("Informe o nome da playlist: ")
+        desc = input("Informe a descrição da playlist: ")
+        x = Playlist(id_p, nome, desc)
+        UI.lista_playlist.append(x)
         print(x)
     @staticmethod
-    def listar_time():
-        for time in UI.lista_time:
-            print(time)
+    def listar_playlist():
+        for playlist in UI.lista_playlist:
+            print(playlist)
 
     @staticmethod
-    def atualizar_time():
-        id_atualizar=int(input("informe o id do time que deseja atualizar"))
-        for time in UI.lista_time:
-            if time.get_id() == id_atualizar: # vai especificar o item que eu quero da lista(lembrando que get guarda o item da lista)
+    def atualizar_playlist():
+        id_atualizar=int(input("informe o id da playlist que deseja atualizar"))
+        for playlist in UI.lista_playlist:
+            if playlist.get_id_p() == id_atualizar: # vai especificar o item que eu quero da lista(lembrando que get guarda o item da lista)
                 nome_novo = input("Informe o novo nome a ser usado ou se não quiser alterar repita o mesmo nome: ")
-                nome_estado = input("Informe o novo nome de estado a ser usado ou se não quiser alterar repita o mesmo nome: ")
-                time.set_nome(nome_novo)
-                time.set_estado(nome_estado)
+                descricao_nova = input("Informe o novo nome de estado a ser usado ou se não quiser alterar repita o mesmo nome: ")
+                playlist.set_nome(nome_novo)
+                playlist.set_descricao(descricao_nova)
                 print("Atualizado") 
-            print(time)
+                print(playlist)
     @staticmethod
-    def excluir_times():
-        id_excluir = int(input("informe o id do time que deseja excluir"))
-        for time in UI.lista_time:
-            if time.get_id() == id_excluir: 
-                UI.lista_time.remove(time)
+    def excluir_playlist():
+        id_excluir = int(input("informe o id da playlist que deseja excluir"))
+        for playlist in UI.lista_playlist:
+            if playlist.get_id_p() == id_excluir: 
+                UI.lista_playlist.remove(playlist)
                 print("Excluido") 
-            print(time)
+                print(playlist)
     @staticmethod
-    def inserir_jogador():
-        id_j = int(input("Informe o id do jogador que será inserido: "))
-        id = int(input("Informe o id do time do jogador: "))
-        nome_j = input("informe o nome do jogador: ")
-        camisa = int(input("informe a camisa do jogador: "))
-        x = Jogadores(id_j, id, nome_j, camisa)
-        UI.lista_jogador.append(x)
+    def cadastra_musica():
+        id_m = int(input("Informe o id da música que será inserido: "))
+        titulo = input("Informe o titulo da música: ")
+        artista = input("Informe o artista que compos essa música: ")
+        album = input("Informe o album dessa música: ")
+        x = Musica(id_m, titulo, artista, album)
+        UI.lista_musica.append(x)
         print(x)
     @staticmethod
-    def listar_jogadores():
-        for jogador in UI.lista_jogador:
-            print(jogador)
+    def listar_musica():
+        for musica in UI.lista_musica:
+            print(musica)
     
     @staticmethod
-    def atualizar_jogador():
-        id_atualizar = int(input("Informe o id do jogador que terá os dados atualizados: "))
-        for jogador in UI.lista_jogador:
-            if jogador.get_id_jogadores() == id_atualizar:
-                id_novo_time = int(input("informe o novo id do time caso o jogador tenha mudado de time: "))
-                camisa_novo = int(input("informe o nova camisa do jogador caso o jogador a tenha mudado: "))
-                jogador.set_id(id_novo_time)
-                jogador.set_camisa(camisa_novo)
-            print(jogador)
+    def atualizar_musica():
+        id_atualizar = int(input("Informe o id da música que terá os dados atualizados: "))
+        for musica in UI.lista_musica:
+            if musica.get_id_musica() == id_atualizar:
+                novo_titulo = input("informe o novo id do time caso o musica tenha mudado de time: ")
+                album_novo = input("informe o nova camisa do musica caso o musica a tenha mudado: ")
+                musica.set_titulo(novo_titulo)
+                musica.set_album(album_novo)
+                print(musica)
 
     @staticmethod
-    def excluir_jogador():
-        id_excluir_j = int(input("Informe o id do jogador que será excluido"))
-        for jogador in UI.lista_jogador:
-            if jogador.get_id_jogadores() == id_excluir_j:
-                UI.lista_jogador.remove(jogador)
-                print("jogador removido")
-
-            print(jogador)
-
+    def excluir_musica():
+        id_excluir_m = int(input("Informe o id da musica que será excluido"))
+        for musica in UI.lista_musica:
+            if musica.get_id_musica() == id_excluir_m:
+                UI.lista_musica.remove(musica)
+                print("musica removida")
     @staticmethod
-    def transferir_um_jogador():
-        id_atualizar = int(input("Informe o id do jogador que terá os dados atualizados: "))
-        for jogador in UI.lista_jogador:
-            if jogador.get_id_jogadores() == id_atualizar:
-                id_novo_time = int(input("informe o novo id do time caso o jogador tenha mudado de time: "))
-                jogador.set_id(id_novo_time)
-                print("Jogador transferido")
-            print(jogador)
+    def artistas_musica():
+        nome_igual = input("Informe o id dos musica para sabermos artista: ")
+        for musica in UI.lista_musica:
+            if musica.get_artista() == nome_igual:
+                print(musica)
 
     @staticmethod
-    def listar_jogadores_time():
-        id_igual = int(input("Informe o id dos jogadores para sabermos se são do mesmo time: "))
-        for jogador in UI.lista_jogador:
-            if jogador.get_id() == id_igual:
-                print(jogador)
+    def adicionar_items():
+        id = int(input("Informe o id do item"))
+        id_p = int(input("Informe o id da playlist"))
+        id_m = int(input("Informe o id da música"))
+        senq = int(input("Informe a sequencia"))
+        x = PlayListlem(id, id_p, id_m, senq)
+        UI.lista_item_p.append(x)
+        print(x)
+    
     @staticmethod
-    def sair():
-        print("Fim")
+    def listar_items():
+        for item in UI.lista_item_p:
+            print(item)
+        
+    @staticmethod
+    def atualizar_items():
+        id_atualizar = int(input("Informe o id do item que deseja atualizar"))
+        for item in UI.lista_item_p:
+            if item.get_id() == id_atualizar:
+                id_p_novo = int(input("Informe o id da playlist que deseja alterar"))
+                id_m_novo = int(input("Informe o id da musica que deseja alterar"))
+                senq_nova = int(input("Informe a sequencia que deseja alterar"))
+                item.set_id_playlist(id_p_novo)
+                item.set_id_musica(id_m_novo)
+                item.set_sequencia(senq_nova)
+                print("Dados atualizados")
+                print(item)
+    
+    @staticmethod
+    def excluir_items():
+        id_excluir = int(input("Informe o id do item que deseja excluir: "))
+        for item in UI.lista_item_p:
+            if item.get_id() == id_excluir:
+                UI.lista_item_p.remove(item)
+                print("item excluido")
             
 UI.main()
 

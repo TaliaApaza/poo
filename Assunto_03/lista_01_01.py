@@ -89,18 +89,26 @@ class PacienteUI():
         id_atualizar = int(input("informe o id que deseja atualizar os dados: "))
         for x in cls.lista_pacientes:
             if x.get_id() == id_atualizar:
-                novo_telefone = input("informe o  novo numero do paciente: ")
+                novo_telefone = input("informe o  novo numero do paciente: ")#fazer dos outros
                 cls.set_nome(novo_telefone)
                 print(x)
 
     @classmethod
     def excluir(cls):
         id_excluir = int(input("Informe o id que será excluido: "))
-
+        for x in cls.lista_pacientes:
+            if x.get_id() == id_excluir:
+                cls.lista_pacientes.remove(x)
 
     @classmethod
     def pesquisar(cls):
+        inicial = input("informe a inicial: ")
+        for x in cls.lista_contato:
+            if x.get_nome().startswith(inicial): print(x)
 
     @classmethod
     def aniversariantes(cls):
+        m = int(input("INforme o mes do aniversario: "))
+        for x in cls.lista_pacientes:
+            if x.get_nascimento().month == m: print(x)
     

@@ -89,10 +89,14 @@ class PacienteUI():
         id_atualizar = int(input("informe o id que deseja atualizar os dados: "))
         for x in cls.lista_pacientes:
             if x.get_id() == id_atualizar:
-                
+                novo_telefone = input("informe o  novo numero do paciente: ")
+                cls.set_nome(novo_telefone)
+                print(x)
 
     @classmethod
     def excluir(cls):
+        id_excluir = int(input("Informe o id que será excluido: "))
+
 
     @classmethod
     def pesquisar(cls):

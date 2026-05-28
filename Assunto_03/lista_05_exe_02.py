@@ -40,4 +40,13 @@ class Boleto():
         if self.__situacao_de_pagamento != Pagamento.EM_ABERTO: raise ValueError("boleto pago")
         self.__valor_pago = valor_pago
         self.__valor_pago = datetime.now()
-        if self.__valor_pago == self.__valor_boleto:
+        if self.__valor_pago == self.__valor_boleto>= self.__valor_boleto: self.__situacao_de_pagamento = Pagamento.PAGO
+        else: self.__situacao_de_pagamento = Pagamento.PAGO_PARCIAL
+    
+    def get_cod_barras(self): return self.__cod_barras
+    def get_data_emissao(self): return self.__data_emissao
+    def get_data_vencimento(self): return self.__data_vencimento
+    def get_data_pagamento(self): return self.__data_pagamento
+    def get_valor_boleto(self): return self.__valor_boleto
+    def get_valor_pago(self): return self.__valor_boleto
+    def get_valor_boleto(self): return self.__valor_boleto

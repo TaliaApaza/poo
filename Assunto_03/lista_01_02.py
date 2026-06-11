@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 class Treino():
     def __init__(self, id, data, distancia, tempo):
         self.set_id(id)
-        self.set_data_treino(data)
+        self.set_data(data)
         self.set_distancia(distancia)
         self.set_tempo(tempo)
     
@@ -12,7 +12,7 @@ class Treino():
 
     def set_data(self, v):
         if v > datetime.now():raise ValueError()
-        self.__nascimento = v
+        self.__data = v
     def set_distancia(self, v):
         if v >= 0: self.__distancia = v
         else: raise ValueError("id invalido")
@@ -34,10 +34,10 @@ class Treino():
        return self.__tempo
     
     def pace(self): 
-        return self.__tempo.total_seconds() / self.__distancia
+        return  (self.__tempo.total_seconds() // 60) / self.__distancia 
     
     def __str__(self):
-        return f" Id: {self.__id} | data: {self.__data.strftime("%d/%m/%Y")} | tempo: {self.__tempo} | distancia: {self.__distancia} | tempo: {self.__tempo} | Pace: {self.pace}"
+        return f" Id: {self.__id} | data: {self.__data} | tempo: {self.__tempo} | distancia: {self.__distancia} | tempo: {self.__tempo} | Pace: {self.pace()}"
     
 
 class TreinoUI():
@@ -47,7 +47,7 @@ class TreinoUI():
     def main():
         op = 0 
         while op!= 7:
-            op == TreinoUI.menu()
+            op = TreinoUI.menu()
             if op == 1: TreinoUI.inserir()
             if op == 2: TreinoUI.listar()
             if op == 3: TreinoUI.atualizar()
@@ -62,33 +62,38 @@ class TreinoUI():
     @classmethod
     def inserir(cls):
         id = int(input("Informe o id: "))
-        data = datetime.srftime(input("informe a data: " , "%d/m%/%Y"))
-    distancia = float(input("Infome adinstancia em km:" ))
-    h = int(input("Infome as hora: "))
-    m = int(input("Infome os minutos: "))
-    s = int(input("Infome os sedundos: "))
-    tempo = timedelta(hours= h,minutes = m, seconds = s)
+        data = datetime.strptime(input("informe a data: "), '%d/%m/%Y')
+        distancia = float(input("Infome adinstancia em km:" ))
+        h = int(input("Infome as hora: "))
+        tempo = timedelta(hours= h)
+        x = Treino(id, data, distancia, tempo)
+        cls.lista_treino.append(x)
+        print(x)
 
     @classmethod
     def listar(cls):
-        if len(cls.lista_pacientes) == 0: print("Nenhum paciente cadastrado")
-        else: 
-            for x in cls.lista_pacientes: print(x, x.idade())
+        for treino in cls.lista_treino:
+            print(treino)
     @classmethod
     def atualizar(cls):
         id_atualizar = int(input("informe o id que deseja atualizar os dados: "))
-        for x in cls.lista_pacientes:
-            if x.get_id() == id_atualizar:
-                novo_telefone = input("informe o  novo numero do paciente: ")#fazer dos outros
-                cls.set_nome(novo_telefone)
-                print(x)
+        for treino in cls.lista_treino:
+            if treino.get_id() == id_atualizar:
+                nova_data = datetime.strptime(input("informe a data: "), '%d/%m/%Y')
+                nova_distancia = float(input("Infome adinstancia em km:" ))
+                h = int(input("Infome as hora: "))
+                novo_tempo = timedelta(hours= h)
+                treino.set_tempo(novo_tempo)
+                treino.set_data(nova_data)
+                treino.set_distancia(nova_distancia)
+                print(treino)
 
     @classmethod
     def excluir(cls):
         id_excluir = int(input("Informe o id que será excluido: "))
-        for x in cls.lista_pacientes:
+        for x in cls.lista_treino:
             if x.get_id() == id_excluir:
-                cls.lista_pacientes.remove(x)
+                cls.lista_treino.remove(x)
 
     @classmethod
     def pesquisar(cls):
@@ -104,3 +109,4 @@ class TreinoUI():
 
 
 
+TreinoUI.main()

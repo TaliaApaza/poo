@@ -34,7 +34,7 @@ class Treino():
        return self.__tempo
     
     def pace(self): 
-        return self.__tempo / self.__distancia
+        return self.__tempo.total_seconds() / self.__distancia
     
     def __str__(self):
         return f" Id: {self.__id} | data: {self.__data.strftime("%d/%m/%Y")} | tempo: {self.__tempo} | distancia: {self.__distancia} | tempo: {self.__tempo} | Pace: {self.pace}"
@@ -62,12 +62,12 @@ class TreinoUI():
     @classmethod
     def inserir(cls):
         id = int(input("Informe o id: "))
-        data =  datetime.strptime(input("Informe a data de nascimento: "), "%d/%m/%Y")
-        distancia = float(input("informe o cpf: "))
-        tel = input("informe o numero: ")
-        x = Treino(id, n, cpf, tel, nasc)
-        cls.lista_pacientes.append(x)
-        print(x)
+        data = datetime.srftime(input("informe a data: " , "%d/m%/%Y"))
+    distancia = float(input("Infome adinstancia em km:" ))
+    h = int(input("Infome as hora: "))
+    m = int(input("Infome os minutos: "))
+    s = int(input("Infome os sedundos: "))
+    tempo = timedelta(hours= h,minutes = m, seconds = s)
 
     @classmethod
     def listar(cls):

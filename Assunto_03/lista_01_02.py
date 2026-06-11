@@ -52,8 +52,7 @@ class TreinoUI():
             if op == 2: TreinoUI.listar()
             if op == 3: TreinoUI.atualizar()
             if op == 4: TreinoUI.excluir()
-            if op == 5: TreinoUI.pesquisar()
-            if op == 6: TreinoUI.maior_treino()
+            if op == 6: TreinoUI.mais_rapido()
     @staticmethod
     def menu():
         print("Opções: 1 - Inserir, 2 - Listar, 3 - Atualizar, 4 - Excluir, 5 - Pesquisar, 6 _Treino mais rapido")
@@ -95,18 +94,18 @@ class TreinoUI():
             if x.get_id() == id_excluir:
                 cls.lista_treino.remove(x)
 
-    @classmethod
-    def pesquisar(cls):
-        inicial = input("informe a inicial: ")
-        for x in cls.lista_contato:
-            if x.get_nome().startswith(inicial): print(x)
 
     @classmethod
-    def maior_treino(cls):
-        m = int(input("INforme o mes do aniversario: "))
-        for x in cls.lista_pacientes:
-            if x.get_nascimento().month == m: print(x)
+    def mais_rapido(cls):
+        melhor = None 
 
+        for treino in cls.lista_treino:
+            if melhor is None: 
+                melhor = treino
+            else: 
+                if treino.pace() < melhor.pace():
+                    melhor = treino
 
+        print(melhor)
 
 TreinoUI.main()

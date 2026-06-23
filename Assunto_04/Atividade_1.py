@@ -24,6 +24,7 @@ class Contato:
 
     def set_data_nascimento(self,v):
         if v >= datetime.now(): raise ValueError("Invalida")
+        self.__data_nascimento = v
 
     def get_id(self): return self.__id
     def get_nome(self): return self.__nome
@@ -32,7 +33,7 @@ class Contato:
     def get_data_nascimento(self): return self.__data_nascimento
 
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
+        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__data_nascimento.srtftime('%d/%m/%Y')}"
 
     def to_json(self):
         return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone }

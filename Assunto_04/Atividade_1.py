@@ -1,6 +1,4 @@
-import json
 from datetime import datetime
-
 class Contato:
     def __init__(self, id, nome, email, fone, data_nascimento):
         self.set_id(id)
@@ -34,19 +32,12 @@ class Contato:
 
     def __str__(self):
         return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__data_nascimento.srtftime('%d/%m/%Y')}"
-
-    def to_json(self):
-        return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone }
-
-    @staticmethod
-    def from_json(dic):
-        return Cliente(dic["id"], dic["nome"], dic["email"], dic["fone"])
    
-class ClienteUI:
-    __objetos = []  # lista de objetos (clientes)  
+class ContatoUI:
+    __contatos= []  # lista de objetos (clientes)  
     @staticmethod    
     def main():
-        ClienteUI.abrir()
+        ContatoUI.abrir()
         op = 0
         while op != 9:
             op = ClienteUI.menu()

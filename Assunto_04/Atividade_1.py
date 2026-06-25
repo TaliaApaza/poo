@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 class Contato:
     def __init__(self, id, nome, email, fone, data_nascimento):
@@ -32,19 +33,29 @@ class Contato:
 
     def __str__(self):
         return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__data_nascimento.srtftime('%d/%m/%Y')}"
-   
+    
+    def to_json(self):
+        return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone, "data":self.__data_nascimento}
+
+    @staticmethod
+    def from_json(dic):
+        return Contato(dic["id"], dic["nome"], dic["email"], dic["fone"], dic["data"])
+    
 class ContatoUI:
-    __contatos= []  # lista de objetos (clientes)  
+    __contato= []  # lista de objetos (clientes)  
     @staticmethod    
     def main():
         ContatoUI.abrir()
         op = 0
         while op != 9:
-            op = ClienteUI.menu()
-            if op == 1: ClienteUI.inserir()
-            if op == 2: ClienteUI.listar()
-            if op == 3: ClienteUI.atualizar()
-            if op == 4: ClienteUI.excluir()
+            op = ContatoUI.menu()
+            if op == 1: ContatoUI.inserir()
+            if op == 2: ContatoUI.listar()
+            if op == 3: ContatoUI.atualizar()
+            if op == 4: ContatoUI.excluir()
+            if op == 5: ContatoUI.pesquisar()
+            if op == 6: ContatoUI.aniversariantes()
+            if op == 7: ContatoUI.salvar()
 
     @staticmethod
     def menu():
@@ -53,22 +64,22 @@ class ContatoUI:
    
     @classmethod
     def salvar(cls):    
-        arquivo = open("clientes.json", mode = "w")
-        json.dump(cls.__objetos, arquivo, default = Cliente.to_json, indent = 2)
+        arquivo = open("contatos.json", mode = "w")
+        json.dump(cls.__objetos, arquivo, default = Contato.to_json, indent = 2)
         arquivo.close()
         print("O arquivo clientes.json foi salvo")
 
     @classmethod
     def abrir(cls):
         try:        
-            arquivo = open("clientes.json", mode = "r")
+            arquivo = open("contatos.json", mode = "r")
             list_dic = json.load(arquivo)
             arquivo.close()
             cls.__objetos = []
             for dic in list_dic:
-                x = Cliente.from_json(dic)
+                x = Contato.from_json(dic)
                 cls.__objetos.append(x)
-            print("O arquivo clientes.json foi aberto")
+            print("O arquivo contatos.json foi aberto")
         except FileNotFoundError: # Acontece qdo o arquivo não existe
             pass                  # não faz nada
 
@@ -78,21 +89,21 @@ class ContatoUI:
         nome = input("Informe o nome: ")
         email = input("Informe o e-mail: ")
         fone = input("Informe o telefone: ")
-        x = Cliente(id, nome, email, fone)
+        x = Contato(id, nome, email, fone)
         cls.__objetos.append(x)
-        ClienteUI.salvar()
+        ContatoUI.salvar()
 
     @classmethod
     def listar(cls):
-        if len(cls.__objetos) == 0: print("Nenhum cliente cadastrado")
+        if len(cls.__contato) == 0: print("Nenhum contato cadastrado")
         else:
-            for x in cls.__objetos: print(x)
+            for x in cls.__contato: print(x)
 
     @classmethod
     def atualizar(cls):
-        for x in cls.__objetos: print(x)
-        id = int(input("Informe o id do cliente a ser atualizado: "))
-        for x in cls.__objetos:
+        for x in cls.__contato: print(x)
+        id = int(input("Informe o id do contato a ser atualizado: "))
+        for x in cls.__contato:
             if x.get_id() == id:
                 nome = input("Informe o novo nome: ")
                 email = input("Informe o novo e-mail: ")
@@ -100,15 +111,15 @@ class ContatoUI:
                 x.set_nome(nome)
                 x.set_email(email)
                 x.set_fone(fone)
-                ClienteUI.salvar()
+                ContatoUI.salvar()
 
     @classmethod
     def excluir(cls):
-        for x in cls.__objetos: print(x)
-        id = int(input("Informe o id do cliente a ser excluído: "))
-        for x in cls.__objetos:
+        for x in cls.__contato: print(x)
+        id = int(input("Informe o id do contato a ser excluído: "))
+        for x in cls.__contato:
             if x.get_id() == id:
                 cls.__objetos.remove(x)
-                ClienteUI.salvar()
+                ContatoUI.salvar()
 
-ClienteUI.main()
+ContatoUI.main()

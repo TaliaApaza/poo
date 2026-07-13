@@ -1,8 +1,8 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDAO
+from modelos.cliente import Cliente
+from modelos.clientedao import ClienteDAO
 
-from models.servico import Servico
-from models.servicodao import ServicoDAO
+from modelos.serviço import Servico
+from modelos.serviçodao import ServicoDAO
 
 
 class Service:
@@ -37,21 +37,25 @@ class Service:
     @staticmethod
     def servico_inserir(id, descricao, valor):
         obj = Servico(id, descricao, valor)
-        Service.__servicoDAO.inserir(obj)
+        Service.__serviçoDAO.inserir(obj)
 
     @staticmethod
     def servico_listar():
-        return Service.__servicoDAO.listar()
+        return Service.__serviçoDAO.listar()
 
     @staticmethod
     def servico_listar_id(id):
-        return Service.__servicoDAO.listar_id(id)
+        return Service.__serviçoDAO.listar_id(id)
 
     @staticmethod
     def servico_atualizar(id, descricao, valor):
         obj = Servico(id, descricao, valor)
-        Service.__servicoDAO.atualizar(obj)
+        Service.__serviçoDAO.atualizar(obj)
 
     @staticmethod
     def servico_excluir(id):
-        Service.__servicoDAO.excluir(id)
+        Service.__servçoDAO.excluir(id)
+
+    @staticmethod
+    def servico_listar_descricao(self, inicio):
+        return self.serviçoDAO.listar_descricao(inicio)

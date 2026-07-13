@@ -1,4 +1,4 @@
-from models.servico import Servico
+from modelos.serviço import Servico
 import json
 
 class ServicoDAO:
@@ -8,8 +8,12 @@ class ServicoDAO:
         self.__abrir()
 
     def inserir(self, obj):
-        self.__objetos.append(obj)
-        self.__salvar()
+        maior = 0
+        for servico in self.servicos:
+            if servico.get_id() > maior:
+                maior = servico.get_id()
+        obj.set_id(maior + 1)
+        self.servicos.append(obj)
 
     def listar(self): return self.__objetos
 
@@ -33,6 +37,18 @@ class ServicoDAO:
         if aux != None:
             self.__objetos.remove(aux)
             self.__salvar()
+
+    def cliente_listar_nome(self, inicio):
+         return self.clienteDAO.listar_nome(inicio)
+    
+    def listar_descricao(self, inicio):
+        lista = []
+
+        for servico in self.servicos:
+            if servico.get_descricao().lower().startswith(inicio.lower()):
+                lista.append(servico)
+
+            return lista
 
     def __abrir(self):
         try:

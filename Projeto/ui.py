@@ -1,5 +1,4 @@
 from service import Service
-
 class UI:
     @staticmethod
     def menu():
@@ -19,7 +18,7 @@ class UI:
     @staticmethod
     def main():
         op = 0
-        while op != 9:
+        while op != 11:
             op = UI.menu()
             if op == 1: UI.cliente_inserir()
             if op == 2: UI.cliente_listar()
@@ -29,11 +28,12 @@ class UI:
             if op == 6: UI.servico_listar()
             if op == 7: UI.servico_atualizar()
             if op == 8: UI.servico_excluir()
+            if op == 9: UI.cliente_listar_nome()
+            if op == 10: UI.servico_listar_nome()
 
     # CLIENTES
     @staticmethod
     def cliente_inserir():
-        id = int(input("Informe o id: "))
         nome = input("Informe o nome: ")
         email = input("Informe o e-mail: ")
         fone = input("Informe o telefone: ")
@@ -65,11 +65,16 @@ class UI:
         id = int(input("Informe o id do cliente a ser excluído: "))
 
         Service.cliente_excluir(id)
+    @staticmethod
+    def cliente_listar_nome():
+        nome = input("Digite o início do nome: ")
+
+        for cliente in Service.cliente_listar_nome(nome):
+            print(cliente)
 
     # SERVIÇOS
     @staticmethod
     def servico_inserir():
-        id = int(input("Informe o id: "))
         descricao = input("Informe a descrição: ")
         valor = float(input("Informe o valor: "))
 
@@ -98,5 +103,11 @@ class UI:
 
         id = int(input("Informe o id do serviço a ser excluído: "))
         Service.servico_excluir(id)
+    @staticmethod
+    def servico_listar_nome():
+        descricao = input("Digite o início da descrição: ")
+
+        for servico in servico.servico_listar_descricao(descricao):
+            print(servico)
 
 UI.main()

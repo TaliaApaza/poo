@@ -24,6 +24,8 @@ class Servico:
     def get_id(self):return self.__id
     def get_descricao(self):return self.__descricao
     def get_valor(self):return self.__valor
+    def cliente_listar_nome(self, inicio):
+        return self.clienteDAO.listar_nome(inicio)
 
     def to_json(self):
         return {

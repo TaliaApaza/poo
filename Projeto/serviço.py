@@ -4,16 +4,20 @@ from modelos.clientedao import ClienteDAO
 from modelos.serviço import Servico
 from modelos.serviçodao import ServicoDAO
 
+from modelos.profissional import Profissional
+from modelos.profissionaldao import ProfissionalDAO
+
 
 class Service:
 
     __clienteDAO = ClienteDAO()
-    __servicoDAO = ServicoDAO()
+    __serviçoDAO = ServicoDAO()
+    __profissionalDAO = ProfissionalDAO()
 
     #CLIENTE
     @staticmethod
-    def cliente_inserir(id, nome, email, fone):
-        obj = Cliente(id, nome, email, fone)
+    def cliente_inserir(id, nome, email, fone, senha):
+        obj = Cliente(id, nome, email, fone, senha)
         Service.__clienteDAO.inserir(obj)
 
     @staticmethod
@@ -21,12 +25,12 @@ class Service:
         return Service.__clienteDAO.listar()
 
     @staticmethod
-    def cliente_listar_id(id):
-        return Service.__clienteDAO.listar_id(id)
+    def cliente_listar_nome(nome):
+        return Service.__clienteDAO.listar_nome(nome)
 
     @staticmethod
-    def cliente_atualizar(id, nome, email, fone):
-        obj = Cliente(id, nome, email, fone)
+    def cliente_atualizar(id, nome, email, fone, senha):
+        obj = Cliente(id, nome, email, fone, senha)
         Service.__clienteDAO.atualizar(obj)
 
     @staticmethod
@@ -59,3 +63,26 @@ class Service:
     @staticmethod
     def servico_listar_descricao(self, inicio):
         return self.serviçoDAO.listar_descricao(inicio)
+    
+    #PROFISSIONAL
+    @staticmethod
+    def profissional_inserir(id, nome, email, senha, especialidade):
+        obj = Profissional(id, nome, email, senha, especialidade)
+        Service.__profissionalDAO.inserir(obj)
+
+    @staticmethod
+    def cliente_listar():
+        return Service.__profissionalDAO.listar()
+
+    @staticmethod
+    def cliente_listar_nome(nome):
+        return Service.__profissionalDAO.listar_nome(nome)
+
+    @staticmethod
+    def cliente_atualizar(id, nome, email, senha, especialidade):
+        obj = Cliente(id, nome, email, senha, especialidade)
+        Service.__profissionalDAO.atualizar(obj)
+
+    @staticmethod
+    def cliente_excluir(id):
+        Service.__profissionalDAO.excluir(id)

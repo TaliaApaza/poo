@@ -10,7 +10,7 @@ class ClienteDAO:
     def inserir(self, obj):
         maior = 0
 
-        for cliente in self.clientes:
+        for cliente in self.__clientes:
             if cliente.get_id() > maior:
                 maior = cliente.get_id()
 

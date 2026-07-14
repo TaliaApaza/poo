@@ -2,17 +2,23 @@ from serviço import Service
 class UI:
     @staticmethod
     def menu():
+        print("----------------------")
         print("1 - Inserir Cliente")
         print("2 - Listar Clientes")
         print("3 - Atualizar Cliente")
         print("4 - Excluir Cliente")
+        print("5 - Listar nome Cliente")
+        print("6 - Inserir Serviço")
+        print("7 - Listar Serviços")
+        print("8 - Atualizar Serviço")
+        print("9 - Excluir Serviço")
+        print("10 - Listar Descrição de Serviço")
+        print("11 - Inserir Profissional")
+        print("12 - Atualizar Profissional")
+        print("13 - Excluir Profissional")
+        print("14 - Listar Nome Do Profissional")
         print("----------------------")
-        print("5 - Inserir Serviço")
-        print("6 - Listar Serviços")
-        print("7 - Atualizar Serviço")
-        print("8 - Excluir Serviço")
-        print("----------------------")
-        print("9 - Fim")
+        print("15 - Fim")
         return int(input("Informe uma opção: "))
 
     @staticmethod
@@ -29,7 +35,7 @@ class UI:
             if op == 7: UI.servico_listar()
             if op == 8: UI.servico_atualizar()
             if op == 9: UI.servico_excluir()
-            if op == 10:UI.servico_listar_nome()
+            if op == 10:UI.servico_listar_descricao()
             if op == 11:UI.profissional_inserir()
             if op == 12: UI.profissional_atualizar()
             if op == 13: UI.profissional_excluir()
@@ -110,7 +116,7 @@ class UI:
         id = int(input("Informe o id do serviço a ser excluído: "))
         Service.servico_excluir(id)
     @staticmethod
-    def servico_listar_nome():
+    def servico_listar_descricao():
         descricao = input("Digite o início da descrição: ")
 
         for servico in servico.servico_listar_descricao(descricao):

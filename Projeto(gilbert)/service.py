@@ -1,7 +1,7 @@
-from models.cliente import Cliente
-from models.clientedao import ClienteDAO
-from models.servico import Servico
-from models.servicodao import ServicoDAO
+from modelos.cliente import Cliente
+from modelos.clientedao import ClienteDAO
+from modelos.servico import Servico
+from modelos.servicodao import ServicoDAO
 
 class Service:
     @staticmethod

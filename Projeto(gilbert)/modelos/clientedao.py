@@ -1,18 +1,18 @@
 from modelos.cliente import Cliente
 import json
 
-class ClienteDAO:
+class Clientedao():
     def __init__(self):
-        self.__arquivo = "clientes.json"
-        self.__objetos = []
+        self.__arquivo = "cliente.json"
+        self.__obj = []
         self.__abrir()
-
+    
     def inserir(self, obj):
-        self.__objetos.append(obj)
+        self.__obj.append(obj)
         self.__salvar()
-
-    def listar(self):                
-        return self.__objetos
+    
+    def listar(self):
+        return self.__obj
 
     def listar_id(self, id):
         for obj in self.__objetos:

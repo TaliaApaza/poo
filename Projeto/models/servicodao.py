@@ -1,18 +1,18 @@
-from modelos.cliente import Cliente
+from models.servico import Servico
 import json
 
-class Clientedao():
+class ServicoDAO:
     def __init__(self):
-        self.__arquivo = "cliente.json"
-        self.__obj = []
+        self.__arquivo = "servicos.json"
+        self.__objetos = []
         self.__abrir()
-    
+
     def inserir(self, obj):
-        self.__obj.append(obj)
+        self.__objetos.append(obj)
         self.__salvar()
-    
-    def listar(self):
-        return self.__obj
+
+    def listar(self):                
+        return self.__objetos
 
     def listar_id(self, id):
         for obj in self.__objetos:
@@ -39,12 +39,12 @@ class Clientedao():
             arquivo.close()
             self.__objetos = []
             for dic in list_dic:
-                obj = Cliente.from_json(dic)
+                obj = Servico.from_json(dic)
                 self.__objetos.append(obj)
         except FileNotFoundError:
             pass
 
     def __salvar(self):    
         arquivo = open(self.__arquivo, mode = "w")
-        json.dump(self.__objetos, arquivo, default = Cliente.to_json, indent = 2)
+        json.dump(self.__objetos, arquivo, default = Servico.to_json, indent = 2)
         arquivo.close()

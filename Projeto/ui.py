@@ -78,4 +78,3 @@ class UI:
         id = int(input("Informe o id do serviço a ser excluído: "))
         Service.servico_excluir(id)
 
-UI.main()

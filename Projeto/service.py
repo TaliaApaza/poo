@@ -2,7 +2,8 @@ from models.cliente import Cliente
 from models.clientedao import ClienteDAO
 from models.servico import Servico
 from models.servicodao import ServicoDAO
-from models.horario import Horario, HorarioDAO
+from models.horario import Horario 
+from models.horariodao import HorarioDAO
 
 class Service:
     @staticmethod

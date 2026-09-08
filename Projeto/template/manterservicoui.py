@@ -5,51 +5,51 @@ from service import Service
 
 class ManterServicoUI:
     def main():
-        st.header("Cadastro de Clientes")
+        st.header("Cadastro de Serviços")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
         with tab1: ManterServicoUI.listar()
         with tab2: ManterServicoUI.inserir()
         with tab3: ManterServicoUI.atualizar()
         with tab4: ManterServicoUI.excluir()
     def listar():
-        clientes = Service.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        servicos = Service.servico_listar()
+        if len(servicos) == 0: st.write("Nenhum serviço cadastrado")
         else:
             list_dic = []
-            for obj in clientes: list_dic.append(obj.to_json())
+            for obj in servicos: list_dic.append(obj.to_json())
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
     def inserir():
-        nome = st.text_input("Informe o nome")
-        email = st.text_input("Informe o e-mail")
-        fone = st.text_input("Informe o fone")
+        id = st.text_input("Informe o id")
+        descricao = st.text_input("Informe a descrição")
+        valor = st.text_input("Informe o valor")
         if st.button("Inserir"):
-            Service.cliente_inserir(nome, email, fone)
-            st.success("Cliente inserido com sucesso")
+            Service.servico_inserir( id, descricao, valor)
+            st.success("Serviço inserido com sucesso")
             time.sleep(2)
             st.rerun()
     def atualizar():
-        clientes = Service.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        servicos = Service.servico_listar()
+        if len(servicos) == 0: st.write("Nenhum serviço cadastrado")
         else:
-            op = st.selectbox("Atualização de Clientes", clientes)
-            nome = st.text_input("Novo nome", op.get_nome())
-            email = st.text_input("Novo e-mail", op.get_email())
-            fone = st.text_input("Novo fone", op.get_fone())
+            op = st.selectbox("Atualização de Serviços", servicos)
+            id = st.text_input("Novo id", op.get_id())
+            descricao = st.text_input("Nova descrição", op.get_descricao())
+            valor = st.text_input("Novo valor", op.get_valor())
             if st.button("Atualizar"):
                 id = op.get_id()
-                Service.cliente_atualizar(id, nome, email, fone)
-                st.success("Cliente atualizado com sucesso")
+                Service.servico_atualizar( id, descricao, valor)
+                st.success("Serviço atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()                
     def excluir():
-        clientes = Service.cliente_listar()
-        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        servicos = Service.servico_listar()
+        if len(servicos) == 0: st.write("Nenhum serviço cadastrado")
         else:
-            op = st.selectbox("Exclusão de Clientes", clientes)
+            op = st.selectbox("Exclusão de Serviços", servicos)
             if st.button("Excluir"):
                 id = op.get_id()
-                Service.cliente_excluir(id)
-                st.success("Cliente excluído com sucesso")
+                Service.servico_excluir(id)
+                st.success("Serviço excluído com sucesso")
                 time.sleep(2)
-                st.rerun()                  
+                st.rerun()  

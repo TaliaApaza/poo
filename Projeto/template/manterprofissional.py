@@ -4,21 +4,21 @@ from service import Service
 import time
 from datetime import datetime
 
-class ManterHorarioUI:
+class ManterProfissionalUI:
     def main():
-        st.header("Cadastro de Horários")
+        st.header("Cadastro de Profissionais")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
-        with tab1: ManterHorarioUI.listar()
-        with tab2: ManterHorarioUI.inserir()
-        with tab3: ManterHorarioUI.atualizar()
-        with tab4: ManterHorarioUI.excluir()
+        with tab1: ManterProfissionalUI.listar()
+        with tab2: ManterProfissionalUI.inserir()
+        with tab3: ManterProfissionalUI.atualizar()
+        with tab4: ManterProfissionalUI.excluir()
 
     def listar():
-        horarios = Service.horario_listar()
-        if len(horarios) == 0: st.write("Nenhum horário cadastrado")
+        profissionais = Service.profissional_listar()
+        if len(profissionais) == 0: st.write("Nenhum profissional cadastrado")
         else:
             dic = []
-            for obj in horarios:
+            for obj in profissionais:
                 cliente = Service.cliente_listar_id(obj.get_id_cliente())
                 servico = Service.servico_listar_id(obj.get_id_servico())
                 if cliente != None: cliente = cliente.get_nome()

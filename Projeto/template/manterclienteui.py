@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from datetime import datetime
 import time
 from service import Service
 
@@ -26,6 +27,7 @@ class ManterClienteUI:
         senha = st.text_input("Informe o senha")
         data_nascimento = st.text_input("Informe o data de nascimento")
         if st.button("Inserir"):
+            data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y")
             Service.cliente_inserir(nome, email, fone, senha, data_nascimento)
             st.success("Cliente inserido com sucesso")
             time.sleep(2)

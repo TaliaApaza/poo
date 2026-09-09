@@ -24,7 +24,6 @@ class Cliente:
         if len(v) != 4: raise ValueError("ehudha")
         self.__senha = v
     def set_data_nascimento(self, v):
-        if v >= datetime.now(): raise ValueError("Pode não")
         self.__data_nascimento = v
 
     def get_id(self) : return self.__id
@@ -43,7 +42,7 @@ class Cliente:
                 "email":self.__email, 
                 "fone":self.__fone, 
                 "senha":self.__senha,
-                "data_nascimento":self.__data_nascimento
+                "data_nascimento":self.__data_nascimento.strftime("%d/%m/%Y")
                 }
    
     @staticmethod
@@ -53,5 +52,5 @@ class Cliente:
                        dic["email"], 
                        dic["fone"],
                        dic["senha"],
-                       dic["data_nascimento"]
+                       datetime.strptime(dic["data_nascimento"], "%d/%m/%Y")
                        )

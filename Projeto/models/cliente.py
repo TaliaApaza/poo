@@ -34,7 +34,7 @@ class Cliente:
     def get_data_nascimento(self): return self.__data_nascimento
 
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__data_nascimento.srtftime('d%/m%/Y%')}"
+        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__data_nascimento.strftime('%d/%m/%Y')}"
    
     def to_json(self):
         return { "id":self.__id, 

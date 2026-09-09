@@ -28,11 +28,11 @@ class ManterServicoUI:
             for obj in servicos:
                 st.write(obj.get_id())
     def inserir():
-        id = st.text_input("Informe o id")
         descricao = st.text_input("Informe a descrição")
         valor = st.text_input("Informe o valor")
         if st.button("Inserir"):
-            Service.servico_inserir( id, descricao, valor)
+            valor = float(valor)
+            Service.servico_inserir(descricao, valor)
             st.success("Serviço inserido com sucesso")
             time.sleep(2)
             st.rerun()

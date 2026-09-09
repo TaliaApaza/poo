@@ -57,7 +57,7 @@ class Atendimento:
                     dic["historico_saude"],
                     dic["avaliacao"],
                     dic["prescricao"],
-                    dic["id_horario"]
+                    dic["id_h"]
                        )
  #   @staticmethod
   #  def from_json(dic):

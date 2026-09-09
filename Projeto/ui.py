@@ -14,6 +14,14 @@ class UI:
             if op == 6: UI.servico_listar()
             if op == 7: UI.servico_atualizar()
             if op == 8: UI.servico_excluir()
+            if op == 5: UI.horario_inserir()
+            if op == 6: UI.horario_listar()
+            if op == 7: UI.horario_atualizar()
+            if op == 8: UI.horario_excluir()
+            if op == 5: UI.profissional_inserir()
+            if op == 6: UI.profissional_listar()
+            if op == 7: UI.profissional_atualizar()
+            if op == 8: UI.profissional_excluir()
 
     @staticmethod
     def menu():

@@ -1,6 +1,6 @@
 from datetime import datetime
 class Horario:
-    def __init__(self, id, data, confirmado, id_cliente,id_servico,id_profissional):
+    def __init__(self, id, data):
         self.set_id(id)
         self.set_data(data)
         self.set_confirmado(False)
@@ -26,7 +26,8 @@ class Horario:
     def set_id_profissional(self, id_profissional): self.__id_profissional = id_profissional
 
     def to_json(self):
-        dic = {"id":self.__id, "data":self.__data.strftime("%d/%m/%Y %H:%M"),
+        dic = {"id":self.__id, 
+               "data":self.__data.strftime("%d/%m/%Y %H:%M"),
                "confirmado":self.__confirmado, 
                "id_cliente":self.__id_cliente,
                "id_servico":self.__id_servico,

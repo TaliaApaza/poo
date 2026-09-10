@@ -16,7 +16,10 @@ class ManterServicoUI:
         if len(servicos) == 0: st.write("Nenhum serviço cadastrado")
         else:
             list_dic = []
-            for obj in servicos: list_dic.append(obj.to_json())
+            for obj in servicos: 
+                departamento= Service.departamento_listar_id(obj.get_id_departamento())
+                if departamento = Service
+                list_dic.append(obj.to_json())
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
     def inserir():

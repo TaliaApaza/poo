@@ -1,0 +1,35 @@
++ getId()               │
++ setId()               │
++ getNome()             │
+ + setNome()             │
++ getCpf()              │
+ + setCpf() 
+
+ ────────┬───────────┘
+│       Service        │
+├──────────────────────┤
+│ + agendamento_inserir│
+│ + agendamento_listar │
+│ + agendamento_       │
+│   atualizar          │
+│ + agendamento_excluir│
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────────┐
+│   ManterAgendamentoUI    │
+└──────────┬───────────────┘
+           │
+           ▼
+┌──────────────────────────┐
+│     AgendamentoDAO       │
+├──────────────────────────┤
+│ + inserir()              │
+│ + listar()               │
+│ + atualizar()            │
+│ + excluir()              │
+└──────────┬───────────────┘
+           │
+           ▼
+┌──────────────────────────┐
+│       Agendamento    

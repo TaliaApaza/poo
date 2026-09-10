@@ -4,13 +4,17 @@ from template.manterhorarioui import ManterHorarioUI
 from template.manterprofissional import ManterProfissionalUI
 from template.manteratendimentoui import ManterAtendimentoUI
 import streamlit as st
-class IndexUI:
-    def main():
-        op = st.sidebar.selectbox("Menu", ["Clientes", "Serviços", "Horários", "Profissionais","Atendimentos"])
-        if op == "Clientes": ManterClienteUI.main()
-        if op == "Serviços": ManterServicoUI.main()
-        if op == "Horários": ManterHorarioUI.main()
-        if op == "Profissionais": ManterProfissionalUI.main()
-        if op == "Atendimentos": ManterAtendimentoUI.main()
 
+class IndexUI:
+    def menu_admin():
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos"])
+        if op == "Cadastro de Clientes": ManterClienteUI.main()
+        if op == "Cadastro de Serviços": ManterServicoUI.main()
+        if op == "Cadastro de Horários": ManterHorarioUI.main()
+        if op == "Cadastro de Profissionais": ManterProfissionalUI.main()
+        if op == "Cadastro de Atendimentos": ManterAtendimentoUI.main()
+    def sidebar():
+        IndexUI.menu_admin()
+    def main():
+        IndexUI.sidebar()
 IndexUI.main()

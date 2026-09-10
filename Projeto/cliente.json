@@ -1,18 +1,18 @@
 [
   {
     "id": 0,
-    "nome": "TaliaApaza",
+    "nome": "hdas",
     "email": "talia.apaza@escolar.ifrn.edu.br",
-    "fone": "2321432454",
-    "senha": "1235",
-    "data_nascimento": "17/11/2009"
+    "fone": "2313123",
+    "senha": "1478",
+    "data_nascimento": "12/09/2008"
   },
   {
     "id": 0,
-    "nome": "TaliaAp",
+    "nome": "hda",
     "email": "talia.apaza@escolar.ifrn.edu.br",
-    "fone": "2321432454",
-    "senha": "1238",
-    "data_nascimento": "17/11/2009"
+    "fone": "2313123",
+    "senha": "1478",
+    "data_nascimento": "12/09/2008"
   }
 ]

@@ -41,10 +41,10 @@ class ManterServicoUI:
         if len(servicos) == 0: st.write("Nenhum serviço cadastrado")
         else:
             op = st.selectbox("Atualização de Serviços", servicos)
-            id = st.text_input("Novo id", op.get_id())
             descricao = st.text_input("Nova descrição", op.get_descricao())
             valor = st.text_input("Novo valor", op.get_valor())
             if st.button("Atualizar"):
+                valor = float(valor)
                 id = op.get_id()
                 Service.servico_atualizar( id, descricao, valor)
                 st.success("Serviço atualizado com sucesso")

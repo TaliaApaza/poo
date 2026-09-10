@@ -15,21 +15,21 @@ class ProfissionalDAO():
         return self.__obj
 
     def listar_id(self, id):
-        for obj in self.__objetos:
+        for obj in self.__obj:
             if obj.get_id() == id: return obj
         return None
 
     def atualizar(self, obj):
         aux = self.listar_id(obj.get_id())
         if aux != None:
-            self.__objetos.remove(aux)
-            self.__objetos.append(obj)
+            self.__obj.remove(aux)
+            self.__obj.append(obj)
             self.__salvar()
 
     def excluir(self, id):
         aux = self.listar_id(id)
         if aux != None:
-            self.__objetos.remove(aux)
+            self.__obj.remove(aux)
             self.__salvar()
 
     def __abrir(self):  
@@ -37,14 +37,14 @@ class ProfissionalDAO():
             arquivo = open(self.__arquivo, mode = "r")
             list_dic = json.load(arquivo)
             arquivo.close()
-            self.__objetos = []
+            self.__obj = []
             for dic in list_dic:
                 obj = Profissional.from_json(dic)
-                self.__objetos.append(obj)
+                self.__obj.append(obj)
         except FileNotFoundError:
             pass
 
     def __salvar(self):    
         arquivo = open(self.__arquivo, mode = "w")
-        json.dump(self.__objetos, arquivo, default = Profissional.to_json, indent = 2)
+        json.dump(self.__obj, arquivo, default = Profissional.to_json, indent = 2)
         arquivo.close()

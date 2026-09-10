@@ -12,6 +12,7 @@ class ManterClienteUI:
         with tab2: ManterClienteUI.inserir()
         with tab3: ManterClienteUI.atualizar()
         with tab4: ManterClienteUI.excluir()
+
     def listar():
         clientes = Service.cliente_listar()
         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
@@ -20,6 +21,7 @@ class ManterClienteUI:
             for obj in clientes: list_dic.append(obj.to_json())
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
+
     def inserir():
         nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
@@ -32,6 +34,7 @@ class ManterClienteUI:
             st.success("Cliente inserido com sucesso")
             time.sleep(2)
             st.rerun()
+
     def atualizar():
         clientes = Service.cliente_listar()
         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
@@ -41,12 +44,15 @@ class ManterClienteUI:
             email = st.text_input("Novo e-mail", op.get_email())
             fone = st.text_input("Novo fone", op.get_fone())
             senha = st.text_input("Nova senha", op.get_senha())
+            data_nascimento = st.text_input("Nova data de nascimento",op.get_data_nascimento().strftime("%d/%m/%Y"))
             if st.button("Atualizar"):
                 id = op.get_id()
-                Service.cliente_atualizar(id, nome, email, fone, senha)
+                data_nascimento = datetime.strptime(data_nascimento,"%d/%m/%Y")
+                Service.cliente_atualizar(id, nome, email, fone, senha, data_nascimento)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
-                st.rerun()                
+                st.rerun()
+                                
     def excluir():
         clientes = Service.cliente_listar()
         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")

@@ -1,13 +1,13 @@
 from datetime import datetime
 class Atendimento:
-    def __init__(self,id, data, queixa_principal, historico_saude, avaliacao, prescricao):
+    def __init__(self,id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
         self.set_id(id)
         self.set_data(data)
         self.set_queixa_principal(queixa_principal)
         self.set_historico_saude(historico_saude)
         self.set_avaliacao(avaliacao)
         self.set_prescricao(prescricao)
-        self.id_horario(0)
+        self.set_id_horario(id_horario)
    
     def set_id(self, id):
         if id < 0: raise ValueError("Id deve ser positivo")
@@ -37,11 +37,11 @@ class Atendimento:
     def get_id_horario(self): return self.__id_horario
 
     def __str__(self):
-        return f"{self.__id} - {self.__data.srtftime('d%/m%/Y%')} - {self.__queixa_principal} - {self.__historico_saude} - {self.__prescricao} - {self.__id_horario} - {self.__avaliacao} "
+        return f"{self.__id} - {self.__data.strftime('%d/m%/%Y')} - {self.__queixa_principal} - {self.__historico_saude} - {self.__prescricao} - {self.__id_horario} - {self.__avaliacao} "
    
     def to_json(self):
         return { "id":self.__id, 
-                "data":self.__data,
+                "data":self.__data.strftime("%d/%m/%Y"),
                 "queixa_principal":self.__queixa_principal, 
                 "historico_saude":self.__historico_saude, 
                 "avaliacao":self.__avaliacao,
@@ -52,12 +52,12 @@ class Atendimento:
     @staticmethod
     def from_json(dic):
         return Atendimento(dic["id"], 
-                    datetime.strptime(dic["data"],"%d/%m/%Y%H:%M"),
+                    datetime.strptime(dic["data"],"%d/%m/%Y"),
                     dic["queixa_principal"], 
                     dic["historico_saude"],
                     dic["avaliacao"],
                     dic["prescricao"],
-                    dic["id_h"]
+                    dic["id_horario"]
                        )
  #   @staticmethod
   #  def from_json(dic):

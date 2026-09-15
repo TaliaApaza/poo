@@ -17,16 +17,24 @@ class ManterServicoUI:
         else:
             list_dic = []
             for obj in servicos: 
-                departamento= Service.departamento_listar_id(obj.get_id_departamento())
-                if departamento = Service
-                list_dic.append(obj.to_json())
+                departamento = departamento.departamento_listar_id(obj.get_id_departamento())
+                if departamento != None: departamento = departamento.get_diretor()
+                list_dic.append({"id" : obj.get_id(), "descricao" : obj.get_descricao(),
+                "valor" : obj.get_valor(), "departamento" : departamento})
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
+                ##list_dic.append(obj.to_json())
+           ## df = pd.DataFrame(list_dic)
+            ##st.dataframe(df)
     def inserir():
+        departamentos = Service.departamento_listar()
         descricao = st.text_input("Informe a descrição")
         valor = st.text_input("Informe o valor")
+        departamento = st.selectbox("Informe o departamento", departamentos, index = None)
         if st.button("Inserir"):
-            Service.servico_inserir(descricao, float(valor))
+            id_departamento = None
+            if departamento != None: id_departamento = departamento.get_id()
+            Service.servico_inserir(descricao, float(valor), id_departamento)
             st.success("Serviço inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -34,13 +42,18 @@ class ManterServicoUI:
         servicos = Service.servico_listar()
         if len(servicos) == 0: st.write("Nenhum serviço cadastrado")
         else: 
+            departamento = Service.departamento_listar()
             op = st.selectbox("Atualização de Serviços", servicos)
             descricao = st.text_input("Nova descrição", op.get_descricao())
             valor = st.text_input("Novo valor", op.get_valor())
+            id_departamento = None if op.get_id_departamento() in [0, None] else op.get_id_departamento()
             if st.button("Atualizar"):
+                id_departamento = None
                 id = op.get_id()
-                Service.servico_atualizar(id, descricao, float(valor))
+                if departamento != None: id_departamento = departamento.get_id()
+                Service.servico_atualizar(id, descricao, float(valor), id_departamento)
                 st.success("Serviço atualizado com sucesso")
+                st.rerun()
     def excluir():
         servicos = Service.servico_listar()
         if len(servicos) == 0: st.write("Nenhum serviço cadastrado")

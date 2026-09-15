@@ -21,7 +21,7 @@ class Cliente:
         if fone == "": raise ValueError("Fone deve ser informado")
         self.__fone = fone
     def set_senha(self,v):
-        if len(v) != 4: raise ValueError("ehudha")
+        if v == "": raise ValueError("Senha incorreta")
         self.__senha = v
     def set_data_nascimento(self, v):
         self.__data_nascimento = v

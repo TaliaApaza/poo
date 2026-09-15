@@ -8,6 +8,8 @@ from models.profissional import Profissional
 from models.profissionaldao import ProfissionalDAO
 from models.atendimento import Atendimento
 from models.atendimentodao import AtendimentoDAO
+from models.departamento import Departamento
+from models.departamentodao import DepartamentoDAO
 
 #Class Cliente
 class Service:
@@ -28,12 +30,27 @@ class Service:
     @staticmethod
     def cliente_excluir(id):
         ClienteDAO().excluir(id)
+    @staticmethod
+    def cliente_criar_admin():
+        for c in Service.cliente_listar():
+            if c.get_email()=="admin":return Service.cliente_inserir("admin", "fone", "1234")
+
+    def cliente_autenticar(email, senha):
+        for c in Service.cliente_listar():
+            if c.get_email() == email and c.get_senha() == senha:
+                return{"id": c.get_id(), "nome": c.get_nome()}
+            
+        return None
+
 
 #CLASS SERVIÇO
     @staticmethod
-    def servico_inserir(descricao, valor):
-        obj = Servico(0, descricao, valor)
-        ServicoDAO().inserir(obj)
+    def servico_inserir(descricao, valor, id_departamento):
+        c = Servico(0)
+        c.set_descricao(descricao)
+        c.set_valor(valor)
+        c.set_id_departamento(id_departamento)
+        ServicoDAO().inserir(c)
     @staticmethod
     def servico_listar():
         return ServicoDAO().listar()
@@ -41,9 +58,13 @@ class Service:
     def servico_listar_id(id):
         return ServicoDAO().listar_id(id)
     @staticmethod
-    def servico_atualizar(id, descricao, valor):
-        obj = Servico(id, descricao, valor)
-        ServicoDAO().atualizar(obj)
+    def servico_atualizar(id, descricao, valor, id_departamento):
+        c = Servico(0)
+        c.set_descricao(descricao)
+        c.set_valor(valor)
+        c.set_id_departamento(id_departamento)
+        ServicoDAO().inserir(c)
+
     @staticmethod
     def servico_excluir(id):
         ServicoDAO().excluir(id)
@@ -112,3 +133,21 @@ class Service:
     @staticmethod
     def atendimento_excluir(id):
         AtendimentoDAO().excluir(id)
+        
+    @staticmethod
+    def departamento_inserir(nome, diretor, fone):
+        obj = Departamento(0,nome, diretor, fone)
+        DepartamentoDAO().inserir(obj)
+    @staticmethod
+    def departamento_listar():
+        return DepartamentoDAO().listar()
+    @staticmethod
+    def departamento_listar_id(id):
+        return DepartamentoDAO().listar_id(id)
+    @staticmethod
+    def departamento_atualizar(id, nome, diretor, fone):
+        obj = Departamento(id, nome, diretor, fone)
+        DepartamentoDAO().atualizar(obj)
+    @staticmethod
+    def departamento_excluir(id):
+        DepartamentoDAO().excluir(id)

@@ -18,7 +18,7 @@ class ManterClienteUI:
         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
         else:
             list_dic = []
-            for obj in clientes: list_dic.append(obj.to_json())
+            for obj in clientes: list_dic.append(obj.to_dict())
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
 
@@ -26,7 +26,7 @@ class ManterClienteUI:
         nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
         fone = st.text_input("Informe o fone")
-        senha = st.text_input("Informe o senha")
+        senha = st.text_input("Informe o senha", type="password")
         data_nascimento = st.text_input("Informe o data de nascimento")
         if st.button("Inserir"):
             data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y")
@@ -43,7 +43,7 @@ class ManterClienteUI:
             nome = st.text_input("Novo nome", op.get_nome())
             email = st.text_input("Novo e-mail", op.get_email())
             fone = st.text_input("Novo fone", op.get_fone())
-            senha = st.text_input("Nova senha", op.get_senha())
+            senha = st.text_input("Nova senha", op.get_senha(), type="password")
             data_nascimento = st.text_input("Nova data de nascimento",op.get_data_nascimento().strftime("%d/%m/%Y"))
             if st.button("Atualizar"):
                 id = op.get_id()

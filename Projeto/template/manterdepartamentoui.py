@@ -41,7 +41,7 @@ class ManterDepartamentoUI:
             fone = st.text_input("Novo fone", op.get_fone())
             if st.button("Atualizar"):
                 id = op.get_id()
-                Service.departamento_atualizar(nome, diretor, fone)
+                Service.departamento_atualizar(id,nome, diretor, fone)
                 st.success("Departamento atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
@@ -50,7 +50,7 @@ class ManterDepartamentoUI:
         departamentos = Service.departamento_listar()
         if len(departamentos) == 0: st.write("Nenhum departamento cadastrado")
         else:
-            op = st.selectbox("Exclusão de Departamento", departamento)
+            op = st.selectbox("Exclusão de Departamento", departamentos)
             if st.button("Excluir"):
                 id = op.get_id()
                 Service.departamento_excluir(id)

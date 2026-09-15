@@ -29,4 +29,4 @@ class Servico:
    
     @staticmethod
     def from_json(dic):
-        return Servico(dic["id"], dic["descricao"], dic["valor"], di["id_departamento"])
+        return Servico(dic["id"], dic["descricao"], dic["valor"], dic["id_departamento"])

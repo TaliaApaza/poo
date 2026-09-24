@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nome": "admin",
+    "email": "admin",
+    "fone": "fone",
+    "senha": "1234"
+  },
+  {
+    "id": 2,
+    "nome": "talia",
+    "email": "talia.apaza@escolar.ifrn.edu.br",
+    "fone": "2029298383",
+    "senha": "09999"
+  },
+  {
+    "id": 3,
+    "nome": "elvertyquetazuadando",
+    "email": "elverty.alberton@gmail.com.br",
+    "fone": "122334445",
+    "senha": "09876"
+  }
+]

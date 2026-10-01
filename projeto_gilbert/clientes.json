@@ -19,5 +19,12 @@
     "email": "elverty.alberton@gmail.com.br",
     "fone": "122334445",
     "senha": "09876"
+  },
+  {
+    "id": 4,
+    "nome": "adm",
+    "email": "adm",
+    "fone": "22343",
+    "senha": "12345"
   }
 ]

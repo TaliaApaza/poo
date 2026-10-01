@@ -5,5 +5,12 @@
     "email": "jujuh.do.pix@gmail.com",
     "especialidade": "chanel",
     "senha": "0987"
+  },
+  {
+    "id": 2,
+    "nome": "Talita",
+    "email": "gg@gg.com",
+    "especialidade": "Predera",
+    "senha": "09876"
   }
 ]

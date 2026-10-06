@@ -132,3 +132,28 @@ class Service:
             Service.horario_inserir(x, False, None, None, id_profissional)
                 # vá para o próximo horário
             x = x + delta
+
+    @staticmethod
+    def lista_agenda():
+        r = HorarioDAO().listar()
+        r.sort(key = lambda obj : obj.get_data())
+        return r
+#vizualiza apenas as agendas
+    @staticmethod
+    def horario_vizualizar_minha_agenda(id_profissional):
+        r = []
+        for h in Service.horario_listar():
+            if h.get_id_profissional() == id_profissional:
+                r.append(h)
+        r.sort (key = lambda h : h.get_data())
+        return r
+
+    @staticmethod
+    def horario_vizualizar_meus_servicos(id_cliente):
+        r = []
+
+        for h in Service.horario_listar():
+            if h.get_id_cliente() == id_cliente:
+                r.append(h)
+        r.sort (key = lambda h : h.get_data())
+        return r

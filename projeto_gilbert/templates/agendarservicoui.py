@@ -1,9 +1,6 @@
-
 import streamlit as st
-import pandas as pd
 from service import Service
 import time
-from datetime import datetime
 
 class AgendarServicoUI:
     def main():

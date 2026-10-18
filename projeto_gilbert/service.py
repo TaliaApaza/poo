@@ -4,6 +4,8 @@ from models.servico import Servico
 from models.servicodao import ServicoDAO
 from models.horario import Horario
 from models.horariodao import HorarioDAO
+from models.atendimento import Atendimento
+from models.atendimentodao import AtendimentoDAO
 from models.profissional import Profissional
 from models.profissionaldao import ProfissionalDAO
 from datetime import datetime, timedelta
@@ -137,6 +139,27 @@ class Service:
         return r
 
     @staticmethod
+    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+        obj = Atendimento(0, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+        AtendimentoDAO().inserir(obj)
+    @staticmethod
+    def atendimento_listar():
+        r = AtendimentoDAO().listar()
+        r.sort(key = lambda obj : obj.get_data())
+        return r
+    @staticmethod
+    def atendimento_listar_id(id):
+        return AtendimentoDAO().listar_id(id)
+    @staticmethod
+    def atendimento_atualizar(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+        obj = Atendimento(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+        AtendimentoDAO().atualizar(obj)
+    @staticmethod
+    def atendimento_excluir(id):
+        AtendimentoDAO().excluir(id)
+
+
+    @staticmethod
     def profissional_inserir(nome, email, especialidade, senha):
         obj = Profissional(0, nome, email, especialidade, senha)
         ProfissionalDAO().inserir(obj)
@@ -160,52 +183,4 @@ class Service:
         for c in Service.profissional_listar():
             if c.get_email() == email and c.get_senha() == senha:
                 return {"id": c.get_id(), "nome": c.get_nome()}
-        return None 
-
-    # Altera somente a senha do cliente.
-    # Nome, e-mail e telefone permanecem iguais.
-    # Isso é importante para o admin, pois seu e-mail não pode mudar.
-    @staticmethod
-    def cliente_alterar_senha(id, senha):
-        obj = Service.cliente_listar_id(id)
-
-        if obj != None:
-            Service.cliente_atualizar(
-                id,
-                obj.get_nome(),
-                obj.get_email(),
-                obj.get_fone(),
-                senha
-            )
-
-
-    @staticmethod
-    def profissional_inserir(nome, email, especialidade, senha):
-        obj = Profissional(0, nome, email, especialidade, senha)
-        ProfissionalDAO().inserir(obj)
-
-    @staticmethod
-    def profissional_listar():
-        r = ProfissionalDAO().listar()
-        r.sort(key = lambda obj : obj.get_nome().casefold())
-        return r
-
-    @staticmethod
-    def profissional_listar_id(id):
-        return ProfissionalDAO().listar_id(id)
-
-    @staticmethod
-    def profissional_atualizar(id, nome, email, especialidade, senha):
-        obj = Profissional(id, nome, email, especialidade, senha)
-        ProfissionalDAO().atualizar(obj)
-
-    @staticmethod
-    def profissional_excluir(id):
-        ProfissionalDAO().excluir(id)
-
-    @staticmethod
-    def profissional_autenticar(email, senha):
-        for c in Service.profissional_listar():
-            if c.get_email() == email and c.get_senha() == senha:
-                return {"id": c.get_id(), "nome": c.get_nome()}
-        return None
+        return None        

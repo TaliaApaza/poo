@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 from service import Service
@@ -92,3 +91,4 @@ class ManterHorarioUI:
                 st.success("Horário excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
+                

@@ -54,4 +54,4 @@ class ManterClienteUI:
                 Service.cliente_excluir(id)
                 st.success("Cliente excluído com sucesso")
                 time.sleep(2)
-                st.rerun() 
+                st.rerun()   

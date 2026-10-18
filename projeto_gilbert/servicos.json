@@ -3,5 +3,10 @@
     "id": 1,
     "descricao": "Medicina na usp",
     "valor": 2.0
+  },
+  {
+    "id": 2,
+    "descricao": "toma vacina",
+    "valor": 12.0
   }
 ]

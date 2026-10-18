@@ -16,4 +16,3 @@ class PerfilClienteUI:
             st.success("Cliente atualizado com sucesso")
             time.sleep(2)
             st.rerun()
-                        

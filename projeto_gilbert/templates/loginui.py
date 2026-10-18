@@ -21,5 +21,5 @@ class LoginUI:
                 st.session_state["usuario_tipo"] = "profissional"
                 st.rerun()
 
-            if c == None and p == None:
+            if c == None and p == None: 
                 st.write("E-mail ou senha inválidos")

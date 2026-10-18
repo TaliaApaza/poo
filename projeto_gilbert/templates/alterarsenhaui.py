@@ -31,6 +31,10 @@ class AlterarSenhaUI:
                     st.session_state["usuario_id"],
                     nova_senha
                 )
+                Service.profissional_alterar_senha(
+                    st.session_state["usuario_id"],
+                    nova_senha
+                )
 
                 st.success("Senha alterada com sucesso")
 

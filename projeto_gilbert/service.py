@@ -18,7 +18,7 @@ class Service:
     @staticmethod
     def cliente_listar():
         r = ClienteDAO().listar()
-        r.sort(key = lambda obj : obj.get_nome().casefold())
+        r.sort(key = lambda obj : obj.get_nome().casefold()) #pega o nome e compara sem diferenciar por maiusculas e minusculas
         return r
     @staticmethod
     def cliente_listar_id(id):

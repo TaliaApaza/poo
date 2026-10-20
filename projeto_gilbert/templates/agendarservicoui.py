@@ -10,7 +10,7 @@ class AgendarServicoUI:
         else:
             profissional = st.selectbox("Informe o profissional", profs)
             horarios = Service.horario_listar_disponiveis(profissional.get_id())
-            if len(horarios) == 0: st.write("Nenhum horário disponível")
+            if len(horarios) == 0: st.write("Nenhum horário disponível") #Aqui, o sistema busca os horários disponíveis para o profissional escolhido.Observe que o método recebe o ID do profissional. Isso significa que a lista de horários depende da seleção anterior.
             else:
                 horario = st.selectbox("Informe o horário", horarios)
                 servicos = Service.servico_listar()

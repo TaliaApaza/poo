@@ -11,7 +11,7 @@ class ListarAgendaClienteUI:
         if len(clientes) == 0: st.write('Nenhum cliente cadastrado')
         else:
             cliente = st.selectbox('Informe o cliente', clientes)
-            horarios = Service.admin_visualizar_agenda(cliente.get_id())
+            horarios = Service.admin_visualizar_agenda_cliente(cliente.get_id())
             if len(horarios) == 0: st.write('Nenhum horário cadastrado')
             else:
                 list_dic = []

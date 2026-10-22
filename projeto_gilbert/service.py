@@ -214,7 +214,7 @@ class Service:
             })
         return resultado
     @staticmethod
-    def admin_visualizar_agenda(id_cliente):
+    def admin_visualizar_agenda_cliente(id_cliente):
         c = []
         horarios = Service.horario_listar()
         for obj in horarios:

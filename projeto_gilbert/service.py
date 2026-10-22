@@ -183,4 +183,33 @@ class Service:
         for c in Service.profissional_listar():
             if c.get_email() == email and c.get_senha() == senha:
                 return {"id": c.get_id(), "nome": c.get_nome()}
-        return None        
+        return None
+
+    @staticmethod
+    def atendimento_totalizar_profissionais(data_inicial, data_final):
+        profissionais = Service.profissional_listar()
+        atendimentos = Service.atendimento_listar()
+        resultado = []
+
+        for profissional in profissionais:
+            total = 0
+
+            for atendimento in atendimentos:
+                horario = Service.horario_listar_id(
+                    atendimento.get_id_horario()
+                )
+                if (horario is not None 
+                    and horario.get_confirmado() == True 
+                    and horario.get_id_profissional() == profissional.get_id()):
+
+                    data = atendimento.get_data().date()
+                    if data_inicial <= data<= data_final:
+                        total += 1
+
+
+            resultado.append({
+                "Profissional": profissional.get_nome(),
+                "Atendimentos confirmados": total
+            })
+
+        return resultado

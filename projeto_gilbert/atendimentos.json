@@ -7,5 +7,14 @@
     "avaliacao": "qe",
     "prescricao": "da",
     "id_horario": 5
+  },
+  {
+    "id": 2,
+    "data": "22/10/2026 07:17",
+    "queixa_principal": "dor de cabe\u00e7a",
+    "historico_saude": "ads",
+    "avaliacao": "dad",
+    "prescricao": "ada",
+    "id_horario": 13
   }
 ]

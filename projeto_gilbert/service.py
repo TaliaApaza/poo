@@ -186,7 +186,7 @@ class Service:
         return None
 
     @staticmethod
-    def atendimento_totalizar_profissionais(data_inicial, data_final):
+    def atendimento_totalizar_profissionais(data_inicio, data_fim):
         profissionais = Service.profissional_listar()
         atendimentos = Service.atendimento_listar()
         resultado = []
@@ -198,18 +198,26 @@ class Service:
                 horario = Service.horario_listar_id(
                     atendimento.get_id_horario()
                 )
-                if (horario is not None 
-                    and horario.get_confirmado() == True 
+
+                if (horario is not None
+                    and horario.get_confirmado() == True
                     and horario.get_id_profissional() == profissional.get_id()):
 
-                    data = atendimento.get_data().date()
-                    if data_inicial <= data<= data_final:
-                        total += 1
+                    data_atendimento = horario.get_data()
 
+                    if data_inicio <= data_atendimento <= data_fim:
+                        total += 1
 
             resultado.append({
                 "Profissional": profissional.get_nome(),
-                "Atendimentos confirmados": total
+                "Total de atendimentos": total
             })
-
         return resultado
+    @staticmethod
+    def admin_visualizar_agenda(id_cliente):
+        c = []
+        horarios = Service.horario_listar()
+        for obj in horarios:
+            if obj.get_id_cliente() == id_cliente: c.append(obj)
+        c.sort(key = lambda obj :obj.get_data())
+        return c

@@ -19,4 +19,4 @@ class TotalizarAtendimentosUI:
 
                 st.subheader("Totalização por Profissional")
 
-                st.table(resultado)
+                st.dataframe(resultado,hide_index=True)

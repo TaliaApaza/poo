@@ -7,7 +7,7 @@ import time
 class ListarHorariosNãoConfirmadosHojeUI:
     def main():
         st.header('Listar Horarios Não Confirmados de Hoje')
-        horarios = Service.horarios_confirmados()
+        horarios = Service.horarios_não_confirmados()
         if len(horarios) == 0: st.write('Nenhum horário cadastrado')
         else:
             list_dic = []

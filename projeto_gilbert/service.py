@@ -221,3 +221,12 @@ class Service:
             if obj.get_id_cliente() == id_cliente: c.append(obj)
         c.sort(key = lambda obj :obj.get_data())
         return c
+
+    @staticmethod
+    def horarios_não_confirmados():
+        h = []
+        horarios = Service.horario_listar()
+        for obj in horarios:
+            if obj.get_confirmado() == False and obj.get_data().day == datetime.now().day: h.append(obj)
+        h.sort(key = lambda obj : obj.get_data())
+        return h
